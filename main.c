@@ -14,14 +14,12 @@
 
 #include <avr/io.h>
 #include <avr/interrupt.h>
-#include <util/delay.h>
+
 void initUART9600(void);
 void initADC(void);
 void writeChar(char);
 void writeLine(char*);
 void ASCII2Dec(uint8_t);	
-
-char *string;
 
 uint8_t ASCII = 0;
 volatile uint8_t bufferTx = 0;
@@ -30,36 +28,24 @@ volatile uint8_t flag = 1; //Set flag for menu
 int main(void)
 {
 	cli();
-    initUART9600();
-	initADC();
+   	initUART9600();//UART Config
+	initADC(); //ADC Config
 	sei();
     while (1) 
     {
-			if(flag == 1){
-				input = 0;
-				//Display menu
-				writeLine("1. Leer potenciómetro.");
-				writeLine("2. Enviar ASCII.");
-				//Wait for valid input
-				while(!(input == One || input == Two));
-				//Check for each of the two valid inputs
-				switch(input){
-					case One: //Input is (ASCII) One
-						ADCSRA |= (1<<ADSC); //Start ADC Conversion
-						flag = 0;
-						_delay_ms(20); //Wait for it to finish
-						break;
-					case Two: //Input is (ASCII) Two
-						writeLine("Ingrese ASCII."); //Input request
-						flag = 0; //Set flag to 0
-						while(flag == 0); //Wait for input 
-						break;
-				}
-			}
-			flag = 1;
-			writeLine("Exiting loop.");
+		input = 0; //Initial input, prevents infinite loops.
+		
+		writeLine("1. Leer potenciómetro."); 	//Display menu
+		writeLine("2. Enviar ASCII.");
+		
+		while(!(input == One || input == Two)); //Wait for valid input.
+		
+		if(input == One){ADCSRA |= (1<<ADSC);}	//If one was received, start ADC.
+
+		flag = 0; //Reset flag, will only be set when ADC/RX finishes.
+		while(flag == 0);	//Wait for that to happen.
 			
-		}
+	}
 }
 
 
@@ -104,13 +90,13 @@ void ASCII2Dec(uint8_t encoded){
 
 ISR(USART_RX_vect){
 	bufferTx = UDR0; input = bufferTx;	
-	if(flag == 1){	
+	if(flag == 1){	//Menu "Mode"
 		if(input == One){writeLine("Leyendo potenciómetro...");}
-		else if(input == Two){writeLine("Leyendo ASCII desde terminal...");}
+		else if(input == Two){writeLine("Leyendo ASCII desde terminal... \n\rIngrese ASCII...\n");}
 		else{writeLine("Entrada inválida. Ingrese 1 o 2.");}
 	}
 	
-	if(flag == 0){PORTD=(bufferTx<<6); PORTB=(bufferTx>>2); flag = 1;}
+	if(flag == 0){PORTD=(bufferTx<<6); PORTB=(bufferTx>>2); flag = 1;} //Rx "Mode"
 }
 ISR(ADC_vect){
 	ASCII = ADCH; 
@@ -118,4 +104,5 @@ ISR(ADC_vect){
 	PORTD=(ASCII<<6);
 	PORTB=(ASCII>>2);
 	ADCSRA |= (1<<ADIF); //Clear interrupt flag.	
+	flag = 1;
 }
