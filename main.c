@@ -9,21 +9,24 @@
 */
 #define  F_CPU 16000000
 #define  Zero 48
-#include <avr/io.h>
-#include <util/delay.h>
-#include <avr/interrupt.h>
+#define  One 49
+#define  Two 50
 
+#include <avr/io.h>
+#include <avr/interrupt.h>
+#include <util/delay.h>
 void initUART9600(void);
 void initADC(void);
 void writeChar(char);
 void writeLine(char*);
 void ASCII2Dec(uint8_t);	
-void menu(void);
+
 char *string;
 
 uint8_t ASCII = 0;
 volatile uint8_t bufferTx = 0;
 volatile uint8_t input = 0;
+volatile uint8_t flag = 1; //Set flag for menu
 int main(void)
 {
 	cli();
@@ -32,16 +35,31 @@ int main(void)
 	sei();
     while (1) 
     {
-		bufferTx = 0;
-		PORTD=(ASCII<<6);
-		PORTB=(ASCII>>2); 
-
-		ASCII2Dec(ASCII);
-		
-		
-		ADCSRA |= (1<<ADSC);
-		_delay_ms(100);
-    }
+			if(flag == 1){
+				input = 0;
+				//Display menu
+				writeLine("1. Leer potenciómetro.");
+				writeLine("2. Enviar ASCII.");
+				//Wait for valid input
+				while(!(input == One || input == Two));
+				//Check for each of the two valid inputs
+				switch(input){
+					case One: //Input is (ASCII) One
+						ADCSRA |= (1<<ADSC); //Start ADC Conversion
+						flag = 0;
+						_delay_ms(20); //Wait for it to finish
+						break;
+					case Two: //Input is (ASCII) Two
+						writeLine("Ingrese ASCII."); //Input request
+						flag = 0; //Set flag to 0
+						while(flag == 0); //Wait for input 
+						break;
+				}
+			}
+			flag = 1;
+			writeLine("Exiting loop.");
+			
+		}
 }
 
 
@@ -57,29 +75,17 @@ void initUART9600(void){
 	UBRR0 = 103;
 	
 }
-
 void initADC(void){
 	ADMUX = 0;
 	ADMUX |= (1<<REFS0)|(0<<REFS1)|(1<<ADLAR);
 	ADCSRA = 0;
 	ADCSRA |= (1<<ADEN);
 	ADCSRA |= (1<<ADIE); 
-	ADCSRA |= (1<<ADSC);
+	
 	ADCSRA |= (1<<ADPS2)|(1<<ADPS1)|(1<<ADPS0);
-	ADCSRA |= (1<<ADSC);
 }
-
 void writeChar(char c){ while(!(UCSR0A & (1<<UDRE0))); UDR0 = c;}
-void writeLine(char* str){for(uint8_t i=0; str[i]!='\0';i++){writeChar(str[i]);} writeChar('\n');}
-
-void menu(void){
-	writeLine("1. Leer potenciómetro.");
-	writeLine("2. Enviar ASCII.");
-	while(input != 1 || input !=2);
-	if(input == 1){}
-	else if(input==2){}
-}
-
+void writeLine(char* str){for(uint8_t i=0; str[i]!='\0';i++){writeChar(str[i]);} writeChar('\n');writeChar('\r');}
 void ASCII2Dec(uint8_t encoded){
 	uint8_t units, tens, hundreds;
 	//Using modulus operator, we can get all positions, like this. input is restricted from 000 to 255, so we'll always do it 3 times.	
@@ -92,23 +98,24 @@ void ASCII2Dec(uint8_t encoded){
 	writeChar(Zero+hundreds);	
 	writeChar(Zero+tens);
 	writeChar(Zero+units);
-
 	writeChar('\n');
+	writeChar('\r');
 }
 
 ISR(USART_RX_vect){
-	bufferTx = UDR0;
-	input = bufferTx;
-	if(input != 1 || input !=2){
-		writeLine("Entrada inválida, ingrese 1 o 2.");
+	bufferTx = UDR0; input = bufferTx;	
+	if(flag == 1){	
+		if(input == One){writeLine("Leyendo potenciómetro...");}
+		else if(input == Two){writeLine("Leyendo ASCII desde terminal...");}
+		else{writeLine("Entrada inválida. Ingrese 1 o 2.");}
 	}
-	PORTD=(bufferTx<<6);
-	PORTB=(bufferTx>>2);
 	
-	_delay_ms(1000);	
+	if(flag == 0){PORTD=(bufferTx<<6); PORTB=(bufferTx>>2); flag = 1;}
 }
 ISR(ADC_vect){
 	ASCII = ADCH; 
-	
+	ASCII2Dec(ASCII);
+	PORTD=(ASCII<<6);
+	PORTB=(ASCII>>2);
 	ADCSRA |= (1<<ADIF); //Clear interrupt flag.	
 }

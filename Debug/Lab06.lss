@@ -3,31 +3,31 @@ Lab06.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         0000004a  00800100  00000358  000003ec  2**0
+  0 .data         000000a0  00800100  000003ee  00000482  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         00000358  00000000  00000000  00000094  2**1
+  1 .text         000003ee  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .bss          00000003  0080014a  0080014a  00000436  2**0
+  2 .bss          00000003  008001a0  008001a0  00000522  2**0
                   ALLOC
-  3 .comment      00000030  00000000  00000000  00000436  2**0
+  3 .comment      00000030  00000000  00000000  00000522  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00000468  2**2
+  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00000554  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 00000060  00000000  00000000  000004a8  2**0
+  5 .debug_aranges 00000058  00000000  00000000  00000594  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   0000099e  00000000  00000000  00000508  2**0
+  6 .debug_info   000009f5  00000000  00000000  000005ec  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00000787  00000000  00000000  00000ea6  2**0
+  7 .debug_abbrev 0000076c  00000000  00000000  00000fe1  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   00000464  00000000  00000000  0000162d  2**0
+  8 .debug_line   0000047a  00000000  00000000  0000174d  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  00000130  00000000  00000000  00001a94  2**2
+  9 .debug_frame  0000014c  00000000  00000000  00001bc8  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00000437  00000000  00000000  00001bc4  2**0
+ 10 .debug_str    00000437  00000000  00000000  00001d14  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    0000030e  00000000  00000000  00001ffb  2**0
+ 11 .debug_loc    00000383  00000000  00000000  0000214b  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000050  00000000  00000000  00002309  2**0
+ 12 .debug_ranges 00000048  00000000  00000000  000024ce  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -51,10 +51,10 @@ Disassembly of section .text:
   3c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
   40:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
   44:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
-  48:	0c 94 1e 01 	jmp	0x23c	; 0x23c <__vector_18>
+  48:	0c 94 3d 01 	jmp	0x27a	; 0x27a <__vector_18>
   4c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
   50:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
-  54:	0c 94 69 01 	jmp	0x2d2	; 0x2d2 <__vector_21>
+  54:	0c 94 94 01 	jmp	0x328	; 0x328 <__vector_21>
   58:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
   5c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
   60:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
@@ -72,18 +72,18 @@ Disassembly of section .text:
   74:	11 e0       	ldi	r17, 0x01	; 1
   76:	a0 e0       	ldi	r26, 0x00	; 0
   78:	b1 e0       	ldi	r27, 0x01	; 1
-  7a:	e8 e5       	ldi	r30, 0x58	; 88
+  7a:	ee ee       	ldi	r30, 0xEE	; 238
   7c:	f3 e0       	ldi	r31, 0x03	; 3
   7e:	02 c0       	rjmp	.+4      	; 0x84 <__do_copy_data+0x10>
   80:	05 90       	lpm	r0, Z+
   82:	0d 92       	st	X+, r0
-  84:	aa 34       	cpi	r26, 0x4A	; 74
+  84:	a0 3a       	cpi	r26, 0xA0	; 160
   86:	b1 07       	cpc	r27, r17
   88:	d9 f7       	brne	.-10     	; 0x80 <__do_copy_data+0xc>
 
 0000008a <__do_clear_bss>:
   8a:	21 e0       	ldi	r18, 0x01	; 1
-  8c:	aa e4       	ldi	r26, 0x4A	; 74
+  8c:	a0 ea       	ldi	r26, 0xA0	; 160
   8e:	b1 e0       	ldi	r27, 0x01	; 1
   90:	01 c0       	rjmp	.+2      	; 0x94 <.do_clear_bss_start>
 
@@ -91,30 +91,35 @@ Disassembly of section .text:
   92:	1d 92       	st	X+, r1
 
 00000094 <.do_clear_bss_start>:
-  94:	ad 34       	cpi	r26, 0x4D	; 77
+  94:	a3 3a       	cpi	r26, 0xA3	; 163
   96:	b2 07       	cpc	r27, r18
   98:	e1 f7       	brne	.-8      	; 0x92 <.do_clear_bss_loop>
-  9a:	0e 94 f7 00 	call	0x1ee	; 0x1ee <main>
-  9e:	0c 94 aa 01 	jmp	0x354	; 0x354 <_exit>
+  9a:	0e 94 a8 00 	call	0x150	; 0x150 <main>
+  9e:	0c 94 f5 01 	jmp	0x3ea	; 0x3ea <_exit>
 
 000000a2 <__bad_interrupt>:
   a2:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
 
 000000a6 <initUART9600>:
-	writeLine("1. Leer potenciómetro.");
-	writeLine("2. Enviar ASCII.");
-	while(input != 1 || input !=2){
-		
-	}
+			
+		}
 }
+
+
+void initUART9600(void){
   a6:	cf 93       	push	r28
   a8:	df 93       	push	r29
+	//Rx as input, Tx as output
+	DDRD &= ~(1<<DDD0);
   aa:	8a b1       	in	r24, 0x0a	; 10
   ac:	8e 7f       	andi	r24, 0xFE	; 254
   ae:	8a b9       	out	0x0a, r24	; 10
+	DDRD |= (1<<DDD0);
   b0:	8a b1       	in	r24, 0x0a	; 10
   b2:	81 60       	ori	r24, 0x01	; 1
   b4:	8a b9       	out	0x0a, r24	; 10
+	
+	UCSR0A = 0;	UCSR0B = 0; UCSR0C = 0; //Initial values
   b6:	c0 ec       	ldi	r28, 0xC0	; 192
   b8:	d0 e0       	ldi	r29, 0x00	; 0
   ba:	18 82       	st	Y, r1
@@ -124,394 +129,486 @@ Disassembly of section .text:
   c2:	e2 ec       	ldi	r30, 0xC2	; 194
   c4:	f0 e0       	ldi	r31, 0x00	; 0
   c6:	10 82       	st	Z, r1
+	UCSR0A |= (0<<U2X0); //UCSR0A Config 
   c8:	88 81       	ld	r24, Y
   ca:	88 83       	st	Y, r24
+	UCSR0B |= (1<<RXCIE0)|(1<<RXEN0)|(1<<TXEN0)|(0<<UCSZ02); //UCSR0B Config. 
   cc:	8c 91       	ld	r24, X
   ce:	88 69       	ori	r24, 0x98	; 152
   d0:	8c 93       	st	X, r24
+	UCSR0C |= (0<<UMSEL01)|(0<<UMSEL00)|(0<<UPM01)|(0<<UPM00)|(0<<USBS0)|(1<<UCSZ01)|(1<<UCSZ00); //UCSR0C Config.
   d2:	80 81       	ld	r24, Z
   d4:	86 60       	ori	r24, 0x06	; 6
   d6:	80 83       	st	Z, r24
+	UBRR0 = 103;
   d8:	87 e6       	ldi	r24, 0x67	; 103
   da:	90 e0       	ldi	r25, 0x00	; 0
   dc:	90 93 c5 00 	sts	0x00C5, r25	; 0x8000c5 <__TEXT_REGION_LENGTH__+0x7f80c5>
   e0:	80 93 c4 00 	sts	0x00C4, r24	; 0x8000c4 <__TEXT_REGION_LENGTH__+0x7f80c4>
+	
+}
   e4:	df 91       	pop	r29
   e6:	cf 91       	pop	r28
   e8:	08 95       	ret
 
 000000ea <initADC>:
+void initADC(void){
+	ADMUX = 0;
   ea:	ec e7       	ldi	r30, 0x7C	; 124
   ec:	f0 e0       	ldi	r31, 0x00	; 0
   ee:	10 82       	st	Z, r1
+	ADMUX |= (1<<REFS0)|(0<<REFS1)|(1<<ADLAR);
   f0:	80 81       	ld	r24, Z
   f2:	80 66       	ori	r24, 0x60	; 96
   f4:	80 83       	st	Z, r24
+	ADCSRA = 0;
   f6:	ea e7       	ldi	r30, 0x7A	; 122
   f8:	f0 e0       	ldi	r31, 0x00	; 0
   fa:	10 82       	st	Z, r1
+	ADCSRA |= (1<<ADEN);
   fc:	80 81       	ld	r24, Z
   fe:	80 68       	ori	r24, 0x80	; 128
  100:	80 83       	st	Z, r24
+	ADCSRA |= (1<<ADIE); 
  102:	80 81       	ld	r24, Z
  104:	88 60       	ori	r24, 0x08	; 8
  106:	80 83       	st	Z, r24
+	
+	ADCSRA |= (1<<ADPS2)|(1<<ADPS1)|(1<<ADPS0);
  108:	80 81       	ld	r24, Z
- 10a:	80 64       	ori	r24, 0x40	; 64
+ 10a:	87 60       	ori	r24, 0x07	; 7
  10c:	80 83       	st	Z, r24
- 10e:	80 81       	ld	r24, Z
- 110:	87 60       	ori	r24, 0x07	; 7
- 112:	80 83       	st	Z, r24
- 114:	80 81       	ld	r24, Z
- 116:	80 64       	ori	r24, 0x40	; 64
- 118:	80 83       	st	Z, r24
- 11a:	08 95       	ret
+ 10e:	08 95       	ret
 
-0000011c <writeChar>:
- 11c:	90 91 c0 00 	lds	r25, 0x00C0	; 0x8000c0 <__TEXT_REGION_LENGTH__+0x7f80c0>
- 120:	95 ff       	sbrs	r25, 5
- 122:	fc cf       	rjmp	.-8      	; 0x11c <writeChar>
- 124:	80 93 c6 00 	sts	0x00C6, r24	; 0x8000c6 <__TEXT_REGION_LENGTH__+0x7f80c6>
- 128:	08 95       	ret
-
-0000012a <writeLine>:
- 12a:	0f 93       	push	r16
- 12c:	1f 93       	push	r17
- 12e:	cf 93       	push	r28
- 130:	8c 01       	movw	r16, r24
- 132:	c0 e0       	ldi	r28, 0x00	; 0
- 134:	03 c0       	rjmp	.+6      	; 0x13c <writeLine+0x12>
- 136:	0e 94 8e 00 	call	0x11c	; 0x11c <writeChar>
- 13a:	cf 5f       	subi	r28, 0xFF	; 255
- 13c:	f8 01       	movw	r30, r16
- 13e:	ec 0f       	add	r30, r28
- 140:	f1 1d       	adc	r31, r1
- 142:	80 81       	ld	r24, Z
- 144:	81 11       	cpse	r24, r1
- 146:	f7 cf       	rjmp	.-18     	; 0x136 <writeLine+0xc>
- 148:	8a e0       	ldi	r24, 0x0A	; 10
- 14a:	0e 94 8e 00 	call	0x11c	; 0x11c <writeChar>
- 14e:	cf 91       	pop	r28
- 150:	1f 91       	pop	r17
- 152:	0f 91       	pop	r16
- 154:	08 95       	ret
-
-00000156 <ASCII2Dec>:
-
-void ASCII2Dec(uint8_t encoded){
- 156:	cf 93       	push	r28
- 158:	df 93       	push	r29
-	uint8_t units, tens, hundreds;
-	//Using modulus operator, we can get all positions, like this. input is restricted from 000 to 255, so we'll always do it 3 times.	
-	units = encoded % 10;
- 15a:	2d ec       	ldi	r18, 0xCD	; 205
- 15c:	82 9f       	mul	r24, r18
- 15e:	c1 2d       	mov	r28, r1
- 160:	11 24       	eor	r1, r1
- 162:	c6 95       	lsr	r28
- 164:	c6 95       	lsr	r28
- 166:	c6 95       	lsr	r28
- 168:	cc 0f       	add	r28, r28
- 16a:	9c 2f       	mov	r25, r28
- 16c:	99 0f       	add	r25, r25
- 16e:	99 0f       	add	r25, r25
- 170:	c9 0f       	add	r28, r25
- 172:	98 2f       	mov	r25, r24
- 174:	9c 1b       	sub	r25, r28
- 176:	c9 2f       	mov	r28, r25
-	encoded = (encoded-units)/10;
- 178:	90 e0       	ldi	r25, 0x00	; 0
- 17a:	8c 1b       	sub	r24, r28
- 17c:	91 09       	sbc	r25, r1
- 17e:	ea e0       	ldi	r30, 0x0A	; 10
- 180:	f0 e0       	ldi	r31, 0x00	; 0
- 182:	bf 01       	movw	r22, r30
- 184:	0e 94 82 01 	call	0x304	; 0x304 <__divmodhi4>
-	tens = encoded %10;
- 188:	62 9f       	mul	r22, r18
- 18a:	d1 2d       	mov	r29, r1
- 18c:	11 24       	eor	r1, r1
- 18e:	d6 95       	lsr	r29
- 190:	d6 95       	lsr	r29
- 192:	d6 95       	lsr	r29
- 194:	dd 0f       	add	r29, r29
- 196:	8d 2f       	mov	r24, r29
- 198:	88 0f       	add	r24, r24
- 19a:	88 0f       	add	r24, r24
- 19c:	d8 0f       	add	r29, r24
- 19e:	86 2f       	mov	r24, r22
- 1a0:	8d 1b       	sub	r24, r29
- 1a2:	d8 2f       	mov	r29, r24
-	encoded = (encoded-tens)/10;
- 1a4:	77 27       	eor	r23, r23
- 1a6:	cb 01       	movw	r24, r22
- 1a8:	8d 1b       	sub	r24, r29
- 1aa:	91 09       	sbc	r25, r1
- 1ac:	bf 01       	movw	r22, r30
- 1ae:	0e 94 82 01 	call	0x304	; 0x304 <__divmodhi4>
-	hundreds = encoded % 10;
- 1b2:	62 9f       	mul	r22, r18
- 1b4:	81 2d       	mov	r24, r1
- 1b6:	11 24       	eor	r1, r1
- 1b8:	86 95       	lsr	r24
- 1ba:	86 95       	lsr	r24
- 1bc:	86 95       	lsr	r24
- 1be:	88 0f       	add	r24, r24
- 1c0:	28 2f       	mov	r18, r24
- 1c2:	22 0f       	add	r18, r18
- 1c4:	22 0f       	add	r18, r18
- 1c6:	82 0f       	add	r24, r18
- 1c8:	68 1b       	sub	r22, r24
- 1ca:	86 2f       	mov	r24, r22
-
-	writeChar(Zero+hundreds);	
- 1cc:	80 5d       	subi	r24, 0xD0	; 208
- 1ce:	0e 94 8e 00 	call	0x11c	; 0x11c <writeChar>
-	writeChar(Zero+tens);
- 1d2:	80 e3       	ldi	r24, 0x30	; 48
- 1d4:	8d 0f       	add	r24, r29
- 1d6:	0e 94 8e 00 	call	0x11c	; 0x11c <writeChar>
-	writeChar(Zero+units);
- 1da:	80 e3       	ldi	r24, 0x30	; 48
- 1dc:	8c 0f       	add	r24, r28
- 1de:	0e 94 8e 00 	call	0x11c	; 0x11c <writeChar>
-
-	writeChar('\n');
- 1e2:	8a e0       	ldi	r24, 0x0A	; 10
- 1e4:	0e 94 8e 00 	call	0x11c	; 0x11c <writeChar>
+00000110 <writeChar>:
 }
- 1e8:	df 91       	pop	r29
- 1ea:	cf 91       	pop	r28
- 1ec:	08 95       	ret
+void writeChar(char c){ while(!(UCSR0A & (1<<UDRE0))); UDR0 = c;}
+ 110:	90 91 c0 00 	lds	r25, 0x00C0	; 0x8000c0 <__TEXT_REGION_LENGTH__+0x7f80c0>
+ 114:	95 ff       	sbrs	r25, 5
+ 116:	fc cf       	rjmp	.-8      	; 0x110 <writeChar>
+ 118:	80 93 c6 00 	sts	0x00C6, r24	; 0x8000c6 <__TEXT_REGION_LENGTH__+0x7f80c6>
+ 11c:	08 95       	ret
 
-000001ee <main>:
-uint8_t ASCII = 0;
+0000011e <writeLine>:
+void writeLine(char* str){for(uint8_t i=0; str[i]!='\0';i++){writeChar(str[i]);} writeChar('\n');writeChar('\r');}
+ 11e:	0f 93       	push	r16
+ 120:	1f 93       	push	r17
+ 122:	cf 93       	push	r28
+ 124:	8c 01       	movw	r16, r24
+ 126:	c0 e0       	ldi	r28, 0x00	; 0
+ 128:	03 c0       	rjmp	.+6      	; 0x130 <writeLine+0x12>
+ 12a:	0e 94 88 00 	call	0x110	; 0x110 <writeChar>
+ 12e:	cf 5f       	subi	r28, 0xFF	; 255
+ 130:	f8 01       	movw	r30, r16
+ 132:	ec 0f       	add	r30, r28
+ 134:	f1 1d       	adc	r31, r1
+ 136:	80 81       	ld	r24, Z
+ 138:	81 11       	cpse	r24, r1
+ 13a:	f7 cf       	rjmp	.-18     	; 0x12a <writeLine+0xc>
+ 13c:	8a e0       	ldi	r24, 0x0A	; 10
+ 13e:	0e 94 88 00 	call	0x110	; 0x110 <writeChar>
+ 142:	8d e0       	ldi	r24, 0x0D	; 13
+ 144:	0e 94 88 00 	call	0x110	; 0x110 <writeChar>
+ 148:	cf 91       	pop	r28
+ 14a:	1f 91       	pop	r17
+ 14c:	0f 91       	pop	r16
+ 14e:	08 95       	ret
+
+00000150 <main>:
 volatile uint8_t bufferTx = 0;
 volatile uint8_t input = 0;
+volatile uint8_t flag = 1; //Set flag for menu
 int main(void)
 {
 	cli();
- 1ee:	f8 94       	cli
+ 150:	f8 94       	cli
     initUART9600();
- 1f0:	0e 94 53 00 	call	0xa6	; 0xa6 <initUART9600>
+ 152:	0e 94 53 00 	call	0xa6	; 0xa6 <initUART9600>
 	initADC();
- 1f4:	0e 94 75 00 	call	0xea	; 0xea <initADC>
+ 156:	0e 94 75 00 	call	0xea	; 0xea <initADC>
 	sei();
- 1f8:	78 94       	sei
+ 15a:	78 94       	sei
     while (1) 
     {
-		bufferTx = 0;
- 1fa:	10 92 4b 01 	sts	0x014B, r1	; 0x80014b <bufferTx>
-		PORTD=(ASCII<<6);
- 1fe:	80 91 4c 01 	lds	r24, 0x014C	; 0x80014c <ASCII>
- 202:	82 95       	swap	r24
- 204:	88 0f       	add	r24, r24
- 206:	88 0f       	add	r24, r24
- 208:	80 7c       	andi	r24, 0xC0	; 192
- 20a:	8b b9       	out	0x0b, r24	; 11
-		PORTB=(ASCII>>2); 
- 20c:	80 91 4c 01 	lds	r24, 0x014C	; 0x80014c <ASCII>
- 210:	86 95       	lsr	r24
- 212:	86 95       	lsr	r24
- 214:	85 b9       	out	0x05, r24	; 5
-
-		ASCII2Dec(ASCII);
- 216:	80 91 4c 01 	lds	r24, 0x014C	; 0x80014c <ASCII>
- 21a:	0e 94 ab 00 	call	0x156	; 0x156 <ASCII2Dec>
-		
-		
-		ADCSRA |= (1<<ADSC);
- 21e:	ea e7       	ldi	r30, 0x7A	; 122
- 220:	f0 e0       	ldi	r31, 0x00	; 0
- 222:	80 81       	ld	r24, Z
- 224:	80 64       	ori	r24, 0x40	; 64
- 226:	80 83       	st	Z, r24
+			if(flag == 1){
+ 15c:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__DATA_REGION_ORIGIN__>
+ 160:	81 30       	cpi	r24, 0x01	; 1
+ 162:	a1 f5       	brne	.+104    	; 0x1cc <main+0x7c>
+				input = 0;
+ 164:	10 92 a0 01 	sts	0x01A0, r1	; 0x8001a0 <__data_end>
+				//Display menu
+				writeLine("1. Leer potenciómetro.");
+ 168:	81 e0       	ldi	r24, 0x01	; 1
+ 16a:	91 e0       	ldi	r25, 0x01	; 1
+ 16c:	0e 94 8f 00 	call	0x11e	; 0x11e <writeLine>
+				writeLine("2. Enviar ASCII.");
+ 170:	88 e1       	ldi	r24, 0x18	; 24
+ 172:	91 e0       	ldi	r25, 0x01	; 1
+ 174:	0e 94 8f 00 	call	0x11e	; 0x11e <writeLine>
+				//Wait for valid input
+				while(!(input == One || input == Two));
+ 178:	80 91 a0 01 	lds	r24, 0x01A0	; 0x8001a0 <__data_end>
+ 17c:	81 33       	cpi	r24, 0x31	; 49
+ 17e:	21 f0       	breq	.+8      	; 0x188 <main+0x38>
+ 180:	80 91 a0 01 	lds	r24, 0x01A0	; 0x8001a0 <__data_end>
+ 184:	82 33       	cpi	r24, 0x32	; 50
+ 186:	c1 f7       	brne	.-16     	; 0x178 <main+0x28>
+				//Check for each of the two valid inputs
+				switch(input){
+ 188:	80 91 a0 01 	lds	r24, 0x01A0	; 0x8001a0 <__data_end>
+ 18c:	81 33       	cpi	r24, 0x31	; 49
+ 18e:	19 f0       	breq	.+6      	; 0x196 <main+0x46>
+ 190:	82 33       	cpi	r24, 0x32	; 50
+ 192:	91 f0       	breq	.+36     	; 0x1b8 <main+0x68>
+ 194:	1b c0       	rjmp	.+54     	; 0x1cc <main+0x7c>
+					case One: //Input is (ASCII) One
+						ADCSRA |= (1<<ADSC); //Start ADC Conversion
+ 196:	ea e7       	ldi	r30, 0x7A	; 122
+ 198:	f0 e0       	ldi	r31, 0x00	; 0
+ 19a:	80 81       	ld	r24, Z
+ 19c:	80 64       	ori	r24, 0x40	; 64
+ 19e:	80 83       	st	Z, r24
+						flag = 0;
+ 1a0:	10 92 00 01 	sts	0x0100, r1	; 0x800100 <__DATA_REGION_ORIGIN__>
 	#else
 		//round up by default
 		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
 	#endif
 
 	__builtin_avr_delay_cycles(__ticks_dc);
- 228:	2f ef       	ldi	r18, 0xFF	; 255
- 22a:	81 ee       	ldi	r24, 0xE1	; 225
- 22c:	94 e0       	ldi	r25, 0x04	; 4
- 22e:	21 50       	subi	r18, 0x01	; 1
- 230:	80 40       	sbci	r24, 0x00	; 0
- 232:	90 40       	sbci	r25, 0x00	; 0
- 234:	e1 f7       	brne	.-8      	; 0x22e <main+0x40>
- 236:	00 c0       	rjmp	.+0      	; 0x238 <main+0x4a>
- 238:	00 00       	nop
- 23a:	df cf       	rjmp	.-66     	; 0x1fa <main+0xc>
+ 1a4:	2f ef       	ldi	r18, 0xFF	; 255
+ 1a6:	89 ef       	ldi	r24, 0xF9	; 249
+ 1a8:	90 e0       	ldi	r25, 0x00	; 0
+ 1aa:	21 50       	subi	r18, 0x01	; 1
+ 1ac:	80 40       	sbci	r24, 0x00	; 0
+ 1ae:	90 40       	sbci	r25, 0x00	; 0
+ 1b0:	e1 f7       	brne	.-8      	; 0x1aa <main+0x5a>
+ 1b2:	00 c0       	rjmp	.+0      	; 0x1b4 <main+0x64>
+ 1b4:	00 00       	nop
+ 1b6:	0a c0       	rjmp	.+20     	; 0x1cc <main+0x7c>
+						_delay_ms(20); //Wait for it to finish
+						break;
+					case Two: //Input is (ASCII) Two
+						writeLine("Ingrese ASCII."); //Input request
+ 1b8:	89 e2       	ldi	r24, 0x29	; 41
+ 1ba:	91 e0       	ldi	r25, 0x01	; 1
+ 1bc:	0e 94 8f 00 	call	0x11e	; 0x11e <writeLine>
+						flag = 0; //Set flag to 0
+ 1c0:	10 92 00 01 	sts	0x0100, r1	; 0x800100 <__DATA_REGION_ORIGIN__>
+						while(flag == 0); //Wait for input 
+ 1c4:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__DATA_REGION_ORIGIN__>
+ 1c8:	88 23       	and	r24, r24
+ 1ca:	e1 f3       	breq	.-8      	; 0x1c4 <main+0x74>
+						break;
+				}
+			}
+			flag = 1;
+ 1cc:	81 e0       	ldi	r24, 0x01	; 1
+ 1ce:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <__DATA_REGION_ORIGIN__>
+			writeLine("Exiting loop.");
+ 1d2:	88 e3       	ldi	r24, 0x38	; 56
+ 1d4:	91 e0       	ldi	r25, 0x01	; 1
+ 1d6:	0e 94 8f 00 	call	0x11e	; 0x11e <writeLine>
+			
+		}
+ 1da:	c0 cf       	rjmp	.-128    	; 0x15c <main+0xc>
 
-0000023c <__vector_18>:
-	writeChar(Zero+units);
-
-	writeChar('\n');
+000001dc <ASCII2Dec>:
+	
+	ADCSRA |= (1<<ADPS2)|(1<<ADPS1)|(1<<ADPS0);
 }
+void writeChar(char c){ while(!(UCSR0A & (1<<UDRE0))); UDR0 = c;}
+void writeLine(char* str){for(uint8_t i=0; str[i]!='\0';i++){writeChar(str[i]);} writeChar('\n');writeChar('\r');}
+void ASCII2Dec(uint8_t encoded){
+ 1dc:	cf 93       	push	r28
+ 1de:	df 93       	push	r29
+	uint8_t units, tens, hundreds;
+	//Using modulus operator, we can get all positions, like this. input is restricted from 000 to 255, so we'll always do it 3 times.	
+	units = encoded % 10;
+ 1e0:	2d ec       	ldi	r18, 0xCD	; 205
+ 1e2:	82 9f       	mul	r24, r18
+ 1e4:	c1 2d       	mov	r28, r1
+ 1e6:	11 24       	eor	r1, r1
+ 1e8:	c6 95       	lsr	r28
+ 1ea:	c6 95       	lsr	r28
+ 1ec:	c6 95       	lsr	r28
+ 1ee:	cc 0f       	add	r28, r28
+ 1f0:	9c 2f       	mov	r25, r28
+ 1f2:	99 0f       	add	r25, r25
+ 1f4:	99 0f       	add	r25, r25
+ 1f6:	c9 0f       	add	r28, r25
+ 1f8:	98 2f       	mov	r25, r24
+ 1fa:	9c 1b       	sub	r25, r28
+ 1fc:	c9 2f       	mov	r28, r25
+	encoded = (encoded-units)/10;
+ 1fe:	90 e0       	ldi	r25, 0x00	; 0
+ 200:	8c 1b       	sub	r24, r28
+ 202:	91 09       	sbc	r25, r1
+ 204:	ea e0       	ldi	r30, 0x0A	; 10
+ 206:	f0 e0       	ldi	r31, 0x00	; 0
+ 208:	bf 01       	movw	r22, r30
+ 20a:	0e 94 cd 01 	call	0x39a	; 0x39a <__divmodhi4>
+	tens = encoded %10;
+ 20e:	62 9f       	mul	r22, r18
+ 210:	d1 2d       	mov	r29, r1
+ 212:	11 24       	eor	r1, r1
+ 214:	d6 95       	lsr	r29
+ 216:	d6 95       	lsr	r29
+ 218:	d6 95       	lsr	r29
+ 21a:	dd 0f       	add	r29, r29
+ 21c:	8d 2f       	mov	r24, r29
+ 21e:	88 0f       	add	r24, r24
+ 220:	88 0f       	add	r24, r24
+ 222:	d8 0f       	add	r29, r24
+ 224:	86 2f       	mov	r24, r22
+ 226:	8d 1b       	sub	r24, r29
+ 228:	d8 2f       	mov	r29, r24
+	encoded = (encoded-tens)/10;
+ 22a:	77 27       	eor	r23, r23
+ 22c:	cb 01       	movw	r24, r22
+ 22e:	8d 1b       	sub	r24, r29
+ 230:	91 09       	sbc	r25, r1
+ 232:	bf 01       	movw	r22, r30
+ 234:	0e 94 cd 01 	call	0x39a	; 0x39a <__divmodhi4>
+	hundreds = encoded % 10;
+ 238:	62 9f       	mul	r22, r18
+ 23a:	81 2d       	mov	r24, r1
+ 23c:	11 24       	eor	r1, r1
+ 23e:	86 95       	lsr	r24
+ 240:	86 95       	lsr	r24
+ 242:	86 95       	lsr	r24
+ 244:	88 0f       	add	r24, r24
+ 246:	28 2f       	mov	r18, r24
+ 248:	22 0f       	add	r18, r18
+ 24a:	22 0f       	add	r18, r18
+ 24c:	82 0f       	add	r24, r18
+ 24e:	68 1b       	sub	r22, r24
+ 250:	86 2f       	mov	r24, r22
+
+	writeChar(Zero+hundreds);	
+ 252:	80 5d       	subi	r24, 0xD0	; 208
+ 254:	0e 94 88 00 	call	0x110	; 0x110 <writeChar>
+	writeChar(Zero+tens);
+ 258:	80 e3       	ldi	r24, 0x30	; 48
+ 25a:	8d 0f       	add	r24, r29
+ 25c:	0e 94 88 00 	call	0x110	; 0x110 <writeChar>
+	writeChar(Zero+units);
+ 260:	80 e3       	ldi	r24, 0x30	; 48
+ 262:	8c 0f       	add	r24, r28
+ 264:	0e 94 88 00 	call	0x110	; 0x110 <writeChar>
+	writeChar('\n');
+ 268:	8a e0       	ldi	r24, 0x0A	; 10
+ 26a:	0e 94 88 00 	call	0x110	; 0x110 <writeChar>
+	writeChar('\r');
+ 26e:	8d e0       	ldi	r24, 0x0D	; 13
+ 270:	0e 94 88 00 	call	0x110	; 0x110 <writeChar>
+}
+ 274:	df 91       	pop	r29
+ 276:	cf 91       	pop	r28
+ 278:	08 95       	ret
+
+0000027a <__vector_18>:
 
 ISR(USART_RX_vect){
- 23c:	1f 92       	push	r1
- 23e:	0f 92       	push	r0
- 240:	0f b6       	in	r0, 0x3f	; 63
- 242:	0f 92       	push	r0
- 244:	11 24       	eor	r1, r1
- 246:	2f 93       	push	r18
- 248:	3f 93       	push	r19
- 24a:	4f 93       	push	r20
- 24c:	5f 93       	push	r21
- 24e:	6f 93       	push	r22
- 250:	7f 93       	push	r23
- 252:	8f 93       	push	r24
- 254:	9f 93       	push	r25
- 256:	af 93       	push	r26
- 258:	bf 93       	push	r27
- 25a:	ef 93       	push	r30
- 25c:	ff 93       	push	r31
-	bufferTx = UDR0;
- 25e:	80 91 c6 00 	lds	r24, 0x00C6	; 0x8000c6 <__TEXT_REGION_LENGTH__+0x7f80c6>
- 262:	80 93 4b 01 	sts	0x014B, r24	; 0x80014b <bufferTx>
-	input = bufferTx;
- 266:	80 91 4b 01 	lds	r24, 0x014B	; 0x80014b <bufferTx>
- 26a:	80 93 4a 01 	sts	0x014A, r24	; 0x80014a <__data_end>
-	if(input != 1 || input !=2){
- 26e:	80 91 4a 01 	lds	r24, 0x014A	; 0x80014a <__data_end>
- 272:	81 30       	cpi	r24, 0x01	; 1
- 274:	21 f4       	brne	.+8      	; 0x27e <__vector_18+0x42>
- 276:	80 91 4a 01 	lds	r24, 0x014A	; 0x80014a <__data_end>
- 27a:	82 30       	cpi	r24, 0x02	; 2
- 27c:	21 f0       	breq	.+8      	; 0x286 <__vector_18+0x4a>
-		writeLine("Entrada inválida, ingrese 1 o 2.");
- 27e:	88 e2       	ldi	r24, 0x28	; 40
- 280:	91 e0       	ldi	r25, 0x01	; 1
- 282:	0e 94 95 00 	call	0x12a	; 0x12a <writeLine>
+ 27a:	1f 92       	push	r1
+ 27c:	0f 92       	push	r0
+ 27e:	0f b6       	in	r0, 0x3f	; 63
+ 280:	0f 92       	push	r0
+ 282:	11 24       	eor	r1, r1
+ 284:	2f 93       	push	r18
+ 286:	3f 93       	push	r19
+ 288:	4f 93       	push	r20
+ 28a:	5f 93       	push	r21
+ 28c:	6f 93       	push	r22
+ 28e:	7f 93       	push	r23
+ 290:	8f 93       	push	r24
+ 292:	9f 93       	push	r25
+ 294:	af 93       	push	r26
+ 296:	bf 93       	push	r27
+ 298:	ef 93       	push	r30
+ 29a:	ff 93       	push	r31
+	bufferTx = UDR0; input = bufferTx;	
+ 29c:	80 91 c6 00 	lds	r24, 0x00C6	; 0x8000c6 <__TEXT_REGION_LENGTH__+0x7f80c6>
+ 2a0:	80 93 a1 01 	sts	0x01A1, r24	; 0x8001a1 <bufferTx>
+ 2a4:	80 91 a1 01 	lds	r24, 0x01A1	; 0x8001a1 <bufferTx>
+ 2a8:	80 93 a0 01 	sts	0x01A0, r24	; 0x8001a0 <__data_end>
+	if(flag == 1){	
+ 2ac:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__DATA_REGION_ORIGIN__>
+ 2b0:	81 30       	cpi	r24, 0x01	; 1
+ 2b2:	b1 f4       	brne	.+44     	; 0x2e0 <__vector_18+0x66>
+		if(input == One){writeLine("Leyendo potenciómetro...");}
+ 2b4:	80 91 a0 01 	lds	r24, 0x01A0	; 0x8001a0 <__data_end>
+ 2b8:	81 33       	cpi	r24, 0x31	; 49
+ 2ba:	29 f4       	brne	.+10     	; 0x2c6 <__vector_18+0x4c>
+ 2bc:	86 e4       	ldi	r24, 0x46	; 70
+ 2be:	91 e0       	ldi	r25, 0x01	; 1
+ 2c0:	0e 94 8f 00 	call	0x11e	; 0x11e <writeLine>
+ 2c4:	0d c0       	rjmp	.+26     	; 0x2e0 <__vector_18+0x66>
+		else if(input == Two){writeLine("Leyendo ASCII desde terminal...");}
+ 2c6:	80 91 a0 01 	lds	r24, 0x01A0	; 0x8001a0 <__data_end>
+ 2ca:	82 33       	cpi	r24, 0x32	; 50
+ 2cc:	29 f4       	brne	.+10     	; 0x2d8 <__vector_18+0x5e>
+ 2ce:	8f e5       	ldi	r24, 0x5F	; 95
+ 2d0:	91 e0       	ldi	r25, 0x01	; 1
+ 2d2:	0e 94 8f 00 	call	0x11e	; 0x11e <writeLine>
+ 2d6:	04 c0       	rjmp	.+8      	; 0x2e0 <__vector_18+0x66>
+		else{writeLine("Entrada inválida. Ingrese 1 o 2.");}
+ 2d8:	8f e7       	ldi	r24, 0x7F	; 127
+ 2da:	91 e0       	ldi	r25, 0x01	; 1
+ 2dc:	0e 94 8f 00 	call	0x11e	; 0x11e <writeLine>
 	}
-	PORTD=(bufferTx<<6);
- 286:	80 91 4b 01 	lds	r24, 0x014B	; 0x80014b <bufferTx>
- 28a:	82 95       	swap	r24
- 28c:	88 0f       	add	r24, r24
- 28e:	88 0f       	add	r24, r24
- 290:	80 7c       	andi	r24, 0xC0	; 192
- 292:	8b b9       	out	0x0b, r24	; 11
-	PORTB=(bufferTx>>2);
- 294:	80 91 4b 01 	lds	r24, 0x014B	; 0x80014b <bufferTx>
- 298:	86 95       	lsr	r24
- 29a:	86 95       	lsr	r24
- 29c:	85 b9       	out	0x05, r24	; 5
- 29e:	2f ef       	ldi	r18, 0xFF	; 255
- 2a0:	83 ed       	ldi	r24, 0xD3	; 211
- 2a2:	90 e3       	ldi	r25, 0x30	; 48
- 2a4:	21 50       	subi	r18, 0x01	; 1
- 2a6:	80 40       	sbci	r24, 0x00	; 0
- 2a8:	90 40       	sbci	r25, 0x00	; 0
- 2aa:	e1 f7       	brne	.-8      	; 0x2a4 <__vector_18+0x68>
- 2ac:	00 c0       	rjmp	.+0      	; 0x2ae <__vector_18+0x72>
- 2ae:	00 00       	nop
 	
-	_delay_ms(1000);	
+	if(flag == 0){PORTD=(bufferTx<<6); PORTB=(bufferTx>>2); flag = 1;}
+ 2e0:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__DATA_REGION_ORIGIN__>
+ 2e4:	81 11       	cpse	r24, r1
+ 2e6:	0f c0       	rjmp	.+30     	; 0x306 <__vector_18+0x8c>
+ 2e8:	80 91 a1 01 	lds	r24, 0x01A1	; 0x8001a1 <bufferTx>
+ 2ec:	82 95       	swap	r24
+ 2ee:	88 0f       	add	r24, r24
+ 2f0:	88 0f       	add	r24, r24
+ 2f2:	80 7c       	andi	r24, 0xC0	; 192
+ 2f4:	8b b9       	out	0x0b, r24	; 11
+ 2f6:	80 91 a1 01 	lds	r24, 0x01A1	; 0x8001a1 <bufferTx>
+ 2fa:	86 95       	lsr	r24
+ 2fc:	86 95       	lsr	r24
+ 2fe:	85 b9       	out	0x05, r24	; 5
+ 300:	81 e0       	ldi	r24, 0x01	; 1
+ 302:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <__DATA_REGION_ORIGIN__>
 }
- 2b0:	ff 91       	pop	r31
- 2b2:	ef 91       	pop	r30
- 2b4:	bf 91       	pop	r27
- 2b6:	af 91       	pop	r26
- 2b8:	9f 91       	pop	r25
- 2ba:	8f 91       	pop	r24
- 2bc:	7f 91       	pop	r23
- 2be:	6f 91       	pop	r22
- 2c0:	5f 91       	pop	r21
- 2c2:	4f 91       	pop	r20
- 2c4:	3f 91       	pop	r19
- 2c6:	2f 91       	pop	r18
- 2c8:	0f 90       	pop	r0
- 2ca:	0f be       	out	0x3f, r0	; 63
- 2cc:	0f 90       	pop	r0
- 2ce:	1f 90       	pop	r1
- 2d0:	18 95       	reti
+ 306:	ff 91       	pop	r31
+ 308:	ef 91       	pop	r30
+ 30a:	bf 91       	pop	r27
+ 30c:	af 91       	pop	r26
+ 30e:	9f 91       	pop	r25
+ 310:	8f 91       	pop	r24
+ 312:	7f 91       	pop	r23
+ 314:	6f 91       	pop	r22
+ 316:	5f 91       	pop	r21
+ 318:	4f 91       	pop	r20
+ 31a:	3f 91       	pop	r19
+ 31c:	2f 91       	pop	r18
+ 31e:	0f 90       	pop	r0
+ 320:	0f be       	out	0x3f, r0	; 63
+ 322:	0f 90       	pop	r0
+ 324:	1f 90       	pop	r1
+ 326:	18 95       	reti
 
-000002d2 <__vector_21>:
+00000328 <__vector_21>:
 ISR(ADC_vect){
- 2d2:	1f 92       	push	r1
- 2d4:	0f 92       	push	r0
- 2d6:	0f b6       	in	r0, 0x3f	; 63
- 2d8:	0f 92       	push	r0
- 2da:	11 24       	eor	r1, r1
- 2dc:	8f 93       	push	r24
- 2de:	ef 93       	push	r30
- 2e0:	ff 93       	push	r31
+ 328:	1f 92       	push	r1
+ 32a:	0f 92       	push	r0
+ 32c:	0f b6       	in	r0, 0x3f	; 63
+ 32e:	0f 92       	push	r0
+ 330:	11 24       	eor	r1, r1
+ 332:	2f 93       	push	r18
+ 334:	3f 93       	push	r19
+ 336:	4f 93       	push	r20
+ 338:	5f 93       	push	r21
+ 33a:	6f 93       	push	r22
+ 33c:	7f 93       	push	r23
+ 33e:	8f 93       	push	r24
+ 340:	9f 93       	push	r25
+ 342:	af 93       	push	r26
+ 344:	bf 93       	push	r27
+ 346:	ef 93       	push	r30
+ 348:	ff 93       	push	r31
 	ASCII = ADCH; 
- 2e2:	80 91 79 00 	lds	r24, 0x0079	; 0x800079 <__TEXT_REGION_LENGTH__+0x7f8079>
- 2e6:	80 93 4c 01 	sts	0x014C, r24	; 0x80014c <ASCII>
-	
+ 34a:	80 91 79 00 	lds	r24, 0x0079	; 0x800079 <__TEXT_REGION_LENGTH__+0x7f8079>
+ 34e:	80 93 a2 01 	sts	0x01A2, r24	; 0x8001a2 <ASCII>
+	ASCII2Dec(ASCII);
+ 352:	0e 94 ee 00 	call	0x1dc	; 0x1dc <ASCII2Dec>
+	PORTD=(ASCII<<6);
+ 356:	80 91 a2 01 	lds	r24, 0x01A2	; 0x8001a2 <ASCII>
+ 35a:	82 95       	swap	r24
+ 35c:	88 0f       	add	r24, r24
+ 35e:	88 0f       	add	r24, r24
+ 360:	80 7c       	andi	r24, 0xC0	; 192
+ 362:	8b b9       	out	0x0b, r24	; 11
+	PORTB=(ASCII>>2);
+ 364:	80 91 a2 01 	lds	r24, 0x01A2	; 0x8001a2 <ASCII>
+ 368:	86 95       	lsr	r24
+ 36a:	86 95       	lsr	r24
+ 36c:	85 b9       	out	0x05, r24	; 5
 	ADCSRA |= (1<<ADIF); //Clear interrupt flag.	
- 2ea:	ea e7       	ldi	r30, 0x7A	; 122
- 2ec:	f0 e0       	ldi	r31, 0x00	; 0
- 2ee:	80 81       	ld	r24, Z
- 2f0:	80 61       	ori	r24, 0x10	; 16
- 2f2:	80 83       	st	Z, r24
+ 36e:	ea e7       	ldi	r30, 0x7A	; 122
+ 370:	f0 e0       	ldi	r31, 0x00	; 0
+ 372:	80 81       	ld	r24, Z
+ 374:	80 61       	ori	r24, 0x10	; 16
+ 376:	80 83       	st	Z, r24
 }
- 2f4:	ff 91       	pop	r31
- 2f6:	ef 91       	pop	r30
- 2f8:	8f 91       	pop	r24
- 2fa:	0f 90       	pop	r0
- 2fc:	0f be       	out	0x3f, r0	; 63
- 2fe:	0f 90       	pop	r0
- 300:	1f 90       	pop	r1
- 302:	18 95       	reti
+ 378:	ff 91       	pop	r31
+ 37a:	ef 91       	pop	r30
+ 37c:	bf 91       	pop	r27
+ 37e:	af 91       	pop	r26
+ 380:	9f 91       	pop	r25
+ 382:	8f 91       	pop	r24
+ 384:	7f 91       	pop	r23
+ 386:	6f 91       	pop	r22
+ 388:	5f 91       	pop	r21
+ 38a:	4f 91       	pop	r20
+ 38c:	3f 91       	pop	r19
+ 38e:	2f 91       	pop	r18
+ 390:	0f 90       	pop	r0
+ 392:	0f be       	out	0x3f, r0	; 63
+ 394:	0f 90       	pop	r0
+ 396:	1f 90       	pop	r1
+ 398:	18 95       	reti
 
-00000304 <__divmodhi4>:
- 304:	97 fb       	bst	r25, 7
- 306:	07 2e       	mov	r0, r23
- 308:	16 f4       	brtc	.+4      	; 0x30e <__divmodhi4+0xa>
- 30a:	00 94       	com	r0
- 30c:	07 d0       	rcall	.+14     	; 0x31c <__divmodhi4_neg1>
- 30e:	77 fd       	sbrc	r23, 7
- 310:	09 d0       	rcall	.+18     	; 0x324 <__divmodhi4_neg2>
- 312:	0e 94 96 01 	call	0x32c	; 0x32c <__udivmodhi4>
- 316:	07 fc       	sbrc	r0, 7
- 318:	05 d0       	rcall	.+10     	; 0x324 <__divmodhi4_neg2>
- 31a:	3e f4       	brtc	.+14     	; 0x32a <__divmodhi4_exit>
+0000039a <__divmodhi4>:
+ 39a:	97 fb       	bst	r25, 7
+ 39c:	07 2e       	mov	r0, r23
+ 39e:	16 f4       	brtc	.+4      	; 0x3a4 <__divmodhi4+0xa>
+ 3a0:	00 94       	com	r0
+ 3a2:	07 d0       	rcall	.+14     	; 0x3b2 <__divmodhi4_neg1>
+ 3a4:	77 fd       	sbrc	r23, 7
+ 3a6:	09 d0       	rcall	.+18     	; 0x3ba <__divmodhi4_neg2>
+ 3a8:	0e 94 e1 01 	call	0x3c2	; 0x3c2 <__udivmodhi4>
+ 3ac:	07 fc       	sbrc	r0, 7
+ 3ae:	05 d0       	rcall	.+10     	; 0x3ba <__divmodhi4_neg2>
+ 3b0:	3e f4       	brtc	.+14     	; 0x3c0 <__divmodhi4_exit>
 
-0000031c <__divmodhi4_neg1>:
- 31c:	90 95       	com	r25
- 31e:	81 95       	neg	r24
- 320:	9f 4f       	sbci	r25, 0xFF	; 255
- 322:	08 95       	ret
+000003b2 <__divmodhi4_neg1>:
+ 3b2:	90 95       	com	r25
+ 3b4:	81 95       	neg	r24
+ 3b6:	9f 4f       	sbci	r25, 0xFF	; 255
+ 3b8:	08 95       	ret
 
-00000324 <__divmodhi4_neg2>:
- 324:	70 95       	com	r23
- 326:	61 95       	neg	r22
- 328:	7f 4f       	sbci	r23, 0xFF	; 255
+000003ba <__divmodhi4_neg2>:
+ 3ba:	70 95       	com	r23
+ 3bc:	61 95       	neg	r22
+ 3be:	7f 4f       	sbci	r23, 0xFF	; 255
 
-0000032a <__divmodhi4_exit>:
- 32a:	08 95       	ret
+000003c0 <__divmodhi4_exit>:
+ 3c0:	08 95       	ret
 
-0000032c <__udivmodhi4>:
- 32c:	aa 1b       	sub	r26, r26
- 32e:	bb 1b       	sub	r27, r27
- 330:	51 e1       	ldi	r21, 0x11	; 17
- 332:	07 c0       	rjmp	.+14     	; 0x342 <__udivmodhi4_ep>
+000003c2 <__udivmodhi4>:
+ 3c2:	aa 1b       	sub	r26, r26
+ 3c4:	bb 1b       	sub	r27, r27
+ 3c6:	51 e1       	ldi	r21, 0x11	; 17
+ 3c8:	07 c0       	rjmp	.+14     	; 0x3d8 <__udivmodhi4_ep>
 
-00000334 <__udivmodhi4_loop>:
- 334:	aa 1f       	adc	r26, r26
- 336:	bb 1f       	adc	r27, r27
- 338:	a6 17       	cp	r26, r22
- 33a:	b7 07       	cpc	r27, r23
- 33c:	10 f0       	brcs	.+4      	; 0x342 <__udivmodhi4_ep>
- 33e:	a6 1b       	sub	r26, r22
- 340:	b7 0b       	sbc	r27, r23
+000003ca <__udivmodhi4_loop>:
+ 3ca:	aa 1f       	adc	r26, r26
+ 3cc:	bb 1f       	adc	r27, r27
+ 3ce:	a6 17       	cp	r26, r22
+ 3d0:	b7 07       	cpc	r27, r23
+ 3d2:	10 f0       	brcs	.+4      	; 0x3d8 <__udivmodhi4_ep>
+ 3d4:	a6 1b       	sub	r26, r22
+ 3d6:	b7 0b       	sbc	r27, r23
 
-00000342 <__udivmodhi4_ep>:
- 342:	88 1f       	adc	r24, r24
- 344:	99 1f       	adc	r25, r25
- 346:	5a 95       	dec	r21
- 348:	a9 f7       	brne	.-22     	; 0x334 <__udivmodhi4_loop>
- 34a:	80 95       	com	r24
- 34c:	90 95       	com	r25
- 34e:	bc 01       	movw	r22, r24
- 350:	cd 01       	movw	r24, r26
- 352:	08 95       	ret
+000003d8 <__udivmodhi4_ep>:
+ 3d8:	88 1f       	adc	r24, r24
+ 3da:	99 1f       	adc	r25, r25
+ 3dc:	5a 95       	dec	r21
+ 3de:	a9 f7       	brne	.-22     	; 0x3ca <__udivmodhi4_loop>
+ 3e0:	80 95       	com	r24
+ 3e2:	90 95       	com	r25
+ 3e4:	bc 01       	movw	r22, r24
+ 3e6:	cd 01       	movw	r24, r26
+ 3e8:	08 95       	ret
 
-00000354 <_exit>:
- 354:	f8 94       	cli
+000003ea <_exit>:
+ 3ea:	f8 94       	cli
 
-00000356 <__stop_program>:
- 356:	ff cf       	rjmp	.-2      	; 0x356 <__stop_program>
+000003ec <__stop_program>:
+ 3ec:	ff cf       	rjmp	.-2      	; 0x3ec <__stop_program>
